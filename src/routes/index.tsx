@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { createFileRoute } from "@tanstack/react-router";
-import { Code, Github } from "lucide-react";
+import { Code, Copy, Github } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   component: App,
@@ -78,6 +78,97 @@ function App() {
               </CardContent>
             </Card>
           </div>
+        </div>
+
+        <div className="mt-16">
+          <h2 className="text-2xl font-semibold mb-4">Full Component Source</h2>
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center justify-between">
+                <span>ImageUploader.tsx</span>
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    navigator.clipboard
+                      .writeText(`import { cn } from \"@/lib/utils\";
+import { Check, Copy, Trash2, Upload, ZoomIn, ZoomOut } from \"lucide-react\";
+import { useCallback, useRef, useState } from \"react\";
+import Cropper from \"react-easy-crop\";
+import { Button } from \"./ui/button\";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from \"./ui/card\";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from \"./ui/dialog\";
+import { Slider } from \"./ui/slider\";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from \"./ui/tooltip\";
+\ninterface Point { x: number; y: number; }\ninterface Area { x: number; y: number; width: number; height: number; }\n\n/**\n * Props for the ImageUploader component\n */\ninterface ImageUploaderProps {\n  aspectRatio?: number;\n  maxSize?: number;\n  acceptedFileTypes?: string[];\n  className?: string;\n  onImageCropped?: (blob: Blob) => void;\n}\n\nexport function ImageUploader({\n  aspectRatio = 1,\n  maxSize = 5 * 1024 * 1024,\n  acceptedFileTypes = [\"image/jpeg\", \"image/png\", \"image/webp\"],\n  className,\n  onImageCropped,\n}: ImageUploaderProps) {\n  const [image, setImage] = useState<string | null>(null);\n  const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null);\n  const [crop, setCrop] = useState<Point>({ x: 0, y: 0 });\n  const [zoom, setZoom] = useState(1);\n  const [error, setError] = useState<string | null>(null);\n  const [previewImage, setPreviewImage] = useState<string | null>(null);\n  const [isCropDialogOpen, setIsCropDialogOpen] = useState(false);\n  const [isCopied, setIsCopied] = useState(false);\n  const inputRef = useRef<HTMLInputElement>(null);\n  // ...rest of the implementation\n}`);
+                  }}
+                >
+                  <Copy className="mr-2 h-4 w-4" /> Copy
+                </Button>
+              </CardTitle>
+              <CardDescription>
+                <a
+                  href="https://github.com/0xrasla/shadcn-image-uploader/blob/master/src/components/ImageUploader.tsx"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline"
+                >
+                  View on GitHub
+                </a>
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <details className="bg-muted p-4 rounded-md overflow-x-auto" open>
+                <summary className="cursor-pointer font-mono text-sm mb-2">
+                  Show/Hide Code
+                </summary>
+                <pre className="text-xs whitespace-pre-wrap">
+                  <code>{`
+import { cn } from "@/lib/utils";
+import { Check, Copy, Trash2, Upload, ZoomIn, ZoomOut } from "lucide-react";
+import { useCallback, useRef, useState } from "react";
+import Cropper from "react-easy-crop";
+import { Button } from "./ui/button";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "./ui/card";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
+import { Slider } from "./ui/slider";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip";
+
+interface Point { x: number; y: number; }
+interface Area { x: number; y: number; width: number; height: number; }
+
+/**
+ * Props for the ImageUploader component
+ */
+interface ImageUploaderProps {
+  aspectRatio?: number;
+  maxSize?: number;
+  acceptedFileTypes?: string[];
+  className?: string;
+  onImageCropped?: (blob: Blob) => void;
+}
+
+export function ImageUploader({
+  aspectRatio = 1,
+  maxSize = 5 * 1024 * 1024,
+  acceptedFileTypes = ["image/jpeg", "image/png", "image/webp"],
+  className,
+  onImageCropped,
+}: ImageUploaderProps) {
+  const [image, setImage] = useState<string | null>(null);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null);
+  const [crop, setCrop] = useState<Point>({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [error, setError] = useState<string | null>(null);
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
+  const [isCropDialogOpen, setIsCropDialogOpen] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  // ...rest of the implementation
+}`}</code>
+                </pre>
+              </details>
+            </CardContent>
+          </Card>
         </div>
 
         <div className="mt-16">

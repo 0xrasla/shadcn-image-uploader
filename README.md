@@ -2,7 +2,7 @@
 
 A reusable React component for uploading, previewing, and cropping images built with [Shadcn UI](https://ui.shadcn.com/).
 
-![Shadcn Image Uploader Demo](https://via.placeholder.com/800x400?text=Shadcn+Image+Uploader)
+![Shadcn Image Uploader Demo](https://raw.githubusercontent.com/0xrasla/shadcn-image-uploader/refs/heads/master/public/demo.png)
 
 ## Features
 
@@ -409,4 +409,58 @@ Files prefixed with `demo` can be safely deleted. They are there to provide a st
 # Learn More
 
 You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).
+
+## Full Component Source
+
+You can view and copy the full component code below or [view it on GitHub](https://github.com/0xrasla/shadcn-image-uploader/blob/master/src/components/ImageUploader.tsx).
+
+<details>
+<summary>Show/Hide ImageUploader.tsx</summary>
+
+```tsx
+import { cn } from "@/lib/utils";
+import { Check, Copy, Trash2, Upload, ZoomIn, ZoomOut } from "lucide-react";
+import { useCallback, useRef, useState } from "react";
+import Cropper from "react-easy-crop";
+import { Button } from "./ui/button";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "./ui/card";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
+import { Slider } from "./ui/slider";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip";
+
+interface Point { x: number; y: number; }
+interface Area { x: number; y: number; width: number; height: number; }
+
+/**
+ * Props for the ImageUploader component
+ */
+interface ImageUploaderProps {
+  aspectRatio?: number;
+  maxSize?: number;
+  acceptedFileTypes?: string[];
+  className?: string;
+  onImageCropped?: (blob: Blob) => void;
+}
+
+export function ImageUploader({
+  aspectRatio = 1,
+  maxSize = 5 * 1024 * 1024,
+  acceptedFileTypes = ["image/jpeg", "image/png", "image/webp"],
+  className,
+  onImageCropped,
+}: ImageUploaderProps) {
+  const [image, setImage] = useState<string | null>(null);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null);
+  const [crop, setCrop] = useState<Point>({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [error, setError] = useState<string | null>(null);
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
+  const [isCropDialogOpen, setIsCropDialogOpen] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  // ...rest of the implementation
+```
+
+</details>
+
 # shadcn-image-uploader
