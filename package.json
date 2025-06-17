@@ -1,5 +1,5 @@
 {
-  "name": ".",
+  "name": "shadcn-image-uploader",
   "private": true,
   "type": "module",
   "scripts": {
